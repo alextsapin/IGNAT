@@ -2,17 +2,19 @@ import React from 'react'
 import Affair from './Affair'
 import {AffairType} from './HW2'
 
-type AffairsPropsType = { // need to fix any
-    data: any
+type AffairsPropsType = {
+    data: Array<AffairType>
     setFilter: any
-    deleteAffairCallback: any
+    deleteAffairCallback: (id: number) => void
 }
 
 function Affairs(props: AffairsPropsType) {
     const mappedAffairs = props.data.map((a: AffairType) => (
-        <Affair // should work
-            key={a._id} // кеи ОБЯЗАТЕЛЬНЫ в 99% - так что лучше их писать всегда при создании компонент в мапе
-            affair={a}
+        <Affair
+            key={a.id}
+            id={a.id}
+            affair={a.name}
+            priority={a.priority}
             deleteAffairCallback={props.deleteAffairCallback}
         />
     ))
@@ -24,8 +26,11 @@ function Affairs(props: AffairsPropsType) {
 
     return (
         <div>
-
-            {mappedAffairs}
+            <table className="table table-dark">
+                <tbody>
+                    {mappedAffairs}
+                </tbody>
+            </table>
 
             <button onClick={setAll}>All</button>
             <button onClick={setHigh}>High</button>

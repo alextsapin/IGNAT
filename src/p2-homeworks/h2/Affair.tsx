@@ -1,21 +1,26 @@
-import React from 'react'
+import React from 'react';
+import css from './style.module.scss';
 
 type AffairPropsType = {
-    // key не нужно типизировать
-    affair: any // need to fix any
-    deleteAffairCallback: any // need to fix any
+    id: number
+    affair: string
+    priority: string
+    deleteAffairCallback: (id: number) => void
 }
 
 function Affair(props: AffairPropsType) {
-    const deleteCallback = () => {}// need to fix
+
+    const deleteCallback = () => {
+        props.deleteAffairCallback(props.id)
+    }
 
     return (
-        <div>
-            // show some text
-
-            <button onClick={deleteCallback}>X</button>
-        </div>
+        <tr>
+            <td>{props.affair}</td>
+            <td>{props.priority}</td>
+            <td><button className="btn btn-light" onClick={deleteCallback}>❌</button></td>
+        </tr>
     )
 }
 
-export default Affair
+export default Affair;
