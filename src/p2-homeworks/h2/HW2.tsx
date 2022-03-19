@@ -28,10 +28,8 @@ export const filterAffairs = (affairs: any, filter: any): any => {
     else return // need to fix
 }
 
-
-
 const HW2 = () => {
-    const [affairs, setAffairs] = useState(defaultAffairs)
+    let [affairs, setAffairs] = useState(defaultAffairs)
     const [filter, setFilter] = useState<FilterType>('all')
 
     const filteredAffairs = filterAffairs(affairs, filter);
@@ -42,17 +40,33 @@ const HW2 = () => {
         setAffairs(filteredAffairs);
     }
 
+    switch(filter) {
+        case 'low':
+        affairs = affairs.filter(i => i.priority === 'low');
+        break;
+
+        case 'middle':
+        affairs = affairs.filter(i => i.priority === 'middle');
+        break;
+
+        case 'high':
+        affairs = affairs.filter(i => i.priority === 'high');
+        break;
+
+        default:
+        affairs = affairs;
+    }
+
     return (
         <div>
             <hr/>
-            <h2>homeworks 2</h2>
+            <h2>Home work № 2</h2>
 
             <Affairs
                 data={affairs}
                 setFilter={setFilter}
                 deleteAffairCallback={deleteAffairCallback}
             />
-
             <hr/>
         </div>
     )

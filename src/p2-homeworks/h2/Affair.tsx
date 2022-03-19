@@ -15,11 +15,11 @@ function Affair(props: AffairPropsType) {
     }
 
     return (
-        <tr>
-            <td>{props.affair}</td>
-            <td>{props.priority}</td>
-            <td><button className="btn btn-light" onClick={deleteCallback}>❌</button></td>
-        </tr>
+        <div className="row bg-dark p-2">
+            <div className="col-md-4 d-flex flex-column justify-content-center">{props.affair}</div>
+            <div className="col-md-4 d-flex flex-column justify-content-center">{props.priority}</div>
+            <div className="col-md-4"><button className="btn btn-light" onClick={deleteCallback}>❌</button></div>
+        </div>
     )
 }
 

@@ -7,7 +7,6 @@ type propsType = {
     time: string
 }
 
-
 function Message(props: propsType) {
     return (
         <div className="message">

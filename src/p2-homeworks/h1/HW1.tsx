@@ -13,6 +13,7 @@ const messageData = {
 function HW1() {
     return (
         <div>
+            <h2>Home work № 1</h2>
             <Message
                 avatar={messageData.avatar}
                 name={messageData.name}

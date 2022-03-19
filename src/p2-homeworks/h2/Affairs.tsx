@@ -1,10 +1,11 @@
-import React from 'react'
-import Affair from './Affair'
-import {AffairType} from './HW2'
+import React from 'react';
+import Affair from './Affair';
+import {AffairType} from './HW2';
+import css from './style.module.scss';
 
 type AffairsPropsType = {
     data: Array<AffairType>
-    setFilter: any
+    setFilter: (priority: string) => void
     deleteAffairCallback: (id: number) => void
 }
 
@@ -19,25 +20,18 @@ function Affairs(props: AffairsPropsType) {
         />
     ))
 
-    const setAll = () => {} // need to fix
-    const setHigh = () => {}
-    const setMiddle = () => {}
-    const setLow = () => {}
-
     return (
         <div>
-            <table className="table table-dark">
-                <tbody>
-                    {mappedAffairs}
-                </tbody>
-            </table>
+            <div className={'container mb-3 ' + css.box}>
+                {mappedAffairs}
+            </div>
 
-            <button onClick={setAll}>All</button>
-            <button onClick={setHigh}>High</button>
-            <button onClick={setMiddle}>Middle</button>
-            <button onClick={setLow}>Low</button>
+            <button className="btn btn-primary me-3" onClick={() => props.setFilter('all')}>All</button>
+            <button className="btn btn-danger me-3" onClick={() => props.setFilter('high')}>High</button>
+            <button className="btn btn-warning me-3" onClick={() => props.setFilter('middle')}>Middle</button>
+            <button className="btn btn-success" onClick={() => props.setFilter('low')}>Low</button>
         </div>
     )
 }
 
-export default Affairs
+export default Affairs;

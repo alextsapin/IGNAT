@@ -1,6 +1,5 @@
-.box {
-    width: 400px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.box > div {
+    &:nth-child(2n) {
+        background: #55595D !important;
+    }
 }
