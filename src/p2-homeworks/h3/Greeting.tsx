@@ -1,5 +1,4 @@
 import React from 'react'
-import s from './Greeting.module.css'
 
 type GreetingPropsType = {
     name: any // need to fix any
@@ -9,18 +8,19 @@ type GreetingPropsType = {
     totalUsers: any // need to fix any
 }
 
-// презентационная компонента (для верстальщика)
-const Greeting: React.FC<GreetingPropsType> = (
-    {name, setNameCallback, addUser, error, totalUsers} // деструктуризация пропсов
-) => {
-    const inputClass = s.error // need to fix with (?:)
+const Greeting: React.FC<GreetingPropsType> = ({name, setNameCallback, addUser, error, totalUsers} ) => {
+    //const inputClass = s.error // need to fix with (?:)
 
     return (
-        <div>
-            <input value={name} onChange={setNameCallback} className={inputClass}/>
-            <span>{error}</span>
-            <button onClick={addUser}>add</button>
-            <span>{totalUsers}</span>
+        <div className="row g-3">
+            <div className="col">
+                <input value={name} onChange={setNameCallback} className="form-control"/>
+                <p className="alert alert-danger py-2 mt-2">{error}88</p>
+            </div>
+            <div className="col">
+                <button className="btn btn-primary" onClick={addUser}>add</button>
+                <span className="alert alert-secondary py-2 ms-3">{totalUsers}</span>
+            </div>
         </div>
     )
 }
