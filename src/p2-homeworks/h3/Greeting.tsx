@@ -1,11 +1,11 @@
 import React from 'react'
 
 type GreetingPropsType = {
-    name: any // need to fix any
-    setNameCallback: any // need to fix any
-    addUser: any // need to fix any
-    error: any // need to fix any
-    totalUsers: any // need to fix any
+    name: string
+    setNameCallback: (value: string) => void
+    addUser: any
+    error: any
+    totalUsers: any
 }
 
 const Greeting: React.FC<GreetingPropsType> = ({name, setNameCallback, addUser, error, totalUsers} ) => {
@@ -14,8 +14,8 @@ const Greeting: React.FC<GreetingPropsType> = ({name, setNameCallback, addUser, 
     return (
         <div className="row g-3">
             <div className="col">
-                <input value={name} onChange={setNameCallback} className="form-control"/>
-                <p className="alert alert-danger py-2 mt-2">{error}88</p>
+                <input value={name} onChange={e => setNameCallback(e.currentTarget.value)} className="form-control"/>
+                {error && <p className="alert alert-danger py-2 mt-2">{error}</p>}
             </div>
             <div className="col">
                 <button className="btn btn-primary" onClick={addUser}>add</button>

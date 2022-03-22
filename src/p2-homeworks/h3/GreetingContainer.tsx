@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import Greeting from './Greeting'
+import React from 'react';
+import Greeting from './Greeting';
 
 type GreetingContainerPropsType = {
     users: any // need to fix any
@@ -12,17 +12,26 @@ type GreetingContainerPropsType = {
 // более современный и удобный для про :)
 // уровень локальной логики
 const GreetingContainer: React.FC<GreetingContainerPropsType> = ({users, addUserCallback}) => { // деструктуризация пропсов
-    const [name, setName] = useState<any>('') // need to fix any
-    const [error, setError] = useState<any>('') // need to fix any
+    const [name, setName] = React.useState('');
+    const [error, setError] = React.useState('');
+    const [nameBox, setInNameBox] = React.useState<Array<string>>([])
 
-    const setNameCallback = (e: any) => { // need to fix any
-        setName('') // need to fix
+    const setNameCallback = (name: string) => { 
+        setName(name.trim()) 
     }
+
     const addUser = () => {
-        alert(`Hello  !`) // need to fix
+        if(name === '') {
+            setError('Ввведите, корректное имя');
+        } else {
+            alert(`Hello, ${name} !`);
+            setInNameBox([name, ...nameBox]);
+            setName('');
+            setError('');
+        }
     }
 
-    const totalUsers = 0 // need to fix
+    const totalUsers = nameBox.length;
 
     return (
         <Greeting
@@ -35,4 +44,4 @@ const GreetingContainer: React.FC<GreetingContainerPropsType> = ({users, addUser
     )
 }
 
-export default GreetingContainer
+export default GreetingContainer;

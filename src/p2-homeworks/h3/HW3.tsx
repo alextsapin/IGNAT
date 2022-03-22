@@ -3,7 +3,7 @@ import GreetingContainer from './GreetingContainer'
 
 export type UserType = {
     id: any
-    name: any
+    name: string
 }
 
 // Уровень работы с глобальными данными
