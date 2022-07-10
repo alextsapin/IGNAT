@@ -5,9 +5,16 @@
 .column {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
 .testSpanError {
     color: blue;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

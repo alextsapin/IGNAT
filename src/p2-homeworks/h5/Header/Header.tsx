@@ -11,10 +11,10 @@ function Header() {
                     <NavLink to="/" className={css.link}>Prejunior</NavLink>
                 </li>
                 <li className={css.item}>
-                    <NavLink to="/" className={css.link}>Junior</NavLink>
+                    <NavLink to="/junior" className={css.link}>Junior</NavLink>
                 </li>
                 <li className={css.item}>
-                    <NavLink to="/" className={css.link}>Junior+</NavLink>
+                    <NavLink to="/junior-plus" className={css.link}>Junior+</NavLink>
                 </li>
                 <li className={css.item}>
                     <img src={point} alt="point"/>
