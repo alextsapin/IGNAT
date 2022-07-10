@@ -1,0 +1,61 @@
+.nav {
+    background: #2F2F30;
+    overflow: hidden;
+    padding: 15px 0;
+}
+
+.menu {
+    width: 300px;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    transform: translateX(-260px);
+    &:hover {
+        animation-duration: 1s;
+        animation-name: showMenu;
+        animation-timing-function: linear;
+        transform: translateX(0px);
+    }
+}
+
+.link {
+    padding: 15px;
+    text-decoration: none;
+    color: white;
+    &:hover {
+        color: orangered;
+    }
+}
+
+// Bonus
+.bonus {
+
+    height: 156px;
+    width: 228px;
+    display: block;
+    margin: 40px auto 0;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+
+}
+
+.bonus_jump {
+    animation-name: jumping;
+    animation-timing-function: linear;
+}
+
+@keyframes showMenu {
+    0% { 
+        transform: translateX(-260px); 
+    }
+    50% { 
+        transform: translateX(-130px); 
+    }
+    100% { 
+        transform: translateX(0); 
+    }
+}

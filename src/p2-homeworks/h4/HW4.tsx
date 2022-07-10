@@ -5,7 +5,7 @@ import SuperButton from './common/c2-SuperButton/SuperButton'
 import SuperCheckbox from './common/c3-SuperCheckbox/SuperCheckbox'
 
 function HW4() {
-    const [text, setText] = useState<string>('')
+    const [text, setText] = useState('')
     const error = text ? '' : 'error'
 
     const showAlert = () => {
@@ -16,13 +16,10 @@ function HW4() {
         }
     }
 
-    const [checked, setChecked] = useState<boolean>(false)
-    const testOnChange = (e: ChangeEvent<HTMLInputElement>) => setChecked(e.currentTarget.checked)
 
     return (
         <div>
-            <hr/>
-            homeworks 4
+            <h2>Home work № 4</h2>
 
             <div className={s.column}>
                 <SuperInputText
@@ -39,40 +36,17 @@ function HW4() {
 
                 {/*----------------------------------------------------*/}
 
-                <SuperButton>
-                    default
-                </SuperButton>
-
-                <SuperButton
-                    red // пропсу с булевым значением не обязательно указывать true
-                    onClick={showAlert}
-                >
-                    delete {/*// название кнопки попадёт в children*/}
-                </SuperButton>
-
-                <SuperButton disabled>
-                    disabled
-                </SuperButton>
+                <SuperButton>Default</SuperButton>
+                <SuperButton red onClick={showAlert}>Delete</SuperButton>
+                <SuperButton disabled>Disabled</SuperButton>
 
                 {/*----------------------------------------------------*/}
 
-                <SuperCheckbox
-                    checked={checked}
-                    onChangeChecked={setChecked}
-                >
-                    some text {/*// этот текст попадёт в children*/}
-                </SuperCheckbox>
-
-                {/*// onChange тоже должен работать*/}
-                <SuperCheckbox checked={checked} onChange={testOnChange}/>
+                <SuperCheckbox>some text</SuperCheckbox>
+                <SuperCheckbox/>
             </div>
 
-            <hr/>
-            {/*для личного творчества, могу проверить*/}
-            {/*<AlternativeSuperInputText/>*/}
-            {/*<AlternativeSuperButton/>*/}
-            {/*<AlternativeSuperCheckbox/>*/}
-            <hr/>
+            <hr/>            
         </div>
     )
 }

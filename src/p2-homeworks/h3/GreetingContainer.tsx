@@ -1,17 +1,7 @@
 import React from 'react';
-import Greeting from './Greeting';
+import Greeting from './Greeting/Greeting';
 
-type GreetingContainerPropsType = {
-    users: any // need to fix any
-    addUserCallback: any // need to fix any
-}
-
-// более простой и понятный для новичков
-// function GreetingContainer(props: GreetingPropsType) {
-
-// более современный и удобный для про :)
-// уровень локальной логики
-const GreetingContainer: React.FC<GreetingContainerPropsType> = ({users, addUserCallback}) => { // деструктуризация пропсов
+const GreetingContainer: React.FC = () => { // деструктуризация пропсов
     const [name, setName] = React.useState('');
     const [error, setError] = React.useState('');
     const [nameBox, setInNameBox] = React.useState<Array<string>>([])

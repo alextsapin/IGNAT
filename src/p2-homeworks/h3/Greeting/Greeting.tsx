@@ -1,28 +1,25 @@
-import React from 'react'
+import React from 'react';
+import css from './Greeting.module.scss';
 
 type GreetingPropsType = {
     name: string
     setNameCallback: (value: string) => void
-    addUser: any
-    error: any
-    totalUsers: any
+    addUser: () => void
+    error: string
+    totalUsers: number
 }
 
 const Greeting: React.FC<GreetingPropsType> = ({name, setNameCallback, addUser, error, totalUsers} ) => {
-    //const inputClass = s.error // need to fix with (?:)
-
     return (
-        <div className="row g-3">
-            <div className="col">
+        <div className={css.box}>
+            <div>
                 <input value={name} onChange={e => setNameCallback(e.currentTarget.value)} className="form-control"/>
                 {error && <p className="alert alert-danger py-2 mt-2">{error}</p>}
             </div>
-            <div className="col">
-                <button className="btn btn-primary" onClick={addUser}>add</button>
-                <span className="alert alert-secondary py-2 ms-3">{totalUsers}</span>
-            </div>
+            <button className="btn btn-primary ms-3" onClick={addUser}>add</button>
+            <span className="ms-3">{totalUsers}</span>
         </div>
     )
 }
 
-export default Greeting
+export default Greeting;
