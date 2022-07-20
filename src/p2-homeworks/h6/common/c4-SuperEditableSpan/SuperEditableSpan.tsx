@@ -1,5 +1,6 @@
 import React, {DetailedHTMLProps, InputHTMLAttributes, HTMLAttributes, useState} from 'react'
-import SuperInputText from '../../../h4/common/c1-SuperInputText/SuperInputText'
+import SuperInputText from '../../../h4/common/c1-SuperInputText/SuperInputText';
+import css from './SuperEditableSpan.module.scss';
 
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -13,63 +14,51 @@ type SuperEditableSpanType = DefaultInputPropsType & { // и + ещё пропс
     onEnter?: () => void
     error?: string
     spanClassName?: string
-
     spanProps?: DefaultSpanPropsType // пропсы для спана
 }
 
-const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
-    {
-        autoFocus, // игнорировать изменение этого пропса
-        onBlur,
-        onEnter,
-        spanProps,
+const SuperEditableSpan: React.FC<SuperEditableSpanType> = ({autoFocus, onBlur, onEnter, spanProps, ...restProps}) => {
 
-        ...restProps// все остальные пропсы попадут в объект restProps
-    }
-) => {
-    const [editMode, setEditMode] = useState<boolean>(false)
+    const [editMode, setEditMode] = useState(false)
     const {children, onDoubleClick, className, ...restSpanProps} = spanProps || {}
 
     const onEnterCallback = () => {
-        // setEditMode() // выключить editMode при нажатии Enter
-
         onEnter && onEnter()
+        setEditMode(false)
     }
-    const onBlurCallback = (e: React.FocusEvent<HTMLInputElement>) => {
-        // setEditMode() // выключить editMode при нажатии за пределами инпута
 
+    const onBlurCallback = (e: React.FocusEvent<HTMLInputElement>) => {
+        setEditMode(false)
         onBlur && onBlur(e)
     }
-    const onDoubleClickCallBack = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-        // setEditMode() // включить editMode при двойном клике
 
+    const onDoubleClickHandler = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        setEditMode(true)
         onDoubleClick && onDoubleClick(e)
     }
 
-    const spanClassName = `${'сделать красивый стиль для спана'} ${className}`
+    const spanClassName = `${css.span} ${className}`
 
     return (
         <>
             {editMode
-                ? (
+                ? 
                     <SuperInputText
                         autoFocus // пропсу с булевым значением не обязательно указывать true
                         onBlur={onBlurCallback}
                         onEnter={onEnterCallback}
-
                         {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
                     />
-                ) : (
+                : 
                     <span
-                        onDoubleClick={onDoubleClickCallBack}
+                        onDoubleClick={onDoubleClickHandler}
                         className={spanClassName}
-
                         {...restSpanProps}
                     >
                         {/*если нет захардкодженного текста для спана, то значение инпута*/}
                         {children || restProps.value}
                     </span>
-                )
+                
             }
         </>
     )
