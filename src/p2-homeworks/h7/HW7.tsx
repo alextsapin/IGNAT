@@ -5,12 +5,12 @@ import SuperRadio from './common/c6-SuperRadio/SuperRadio'
 const arr = ['x', 'y', 'z']
 
 function HW7() {
-    const [value, onChangeOption] = useState(arr[2])
+    const [value, onChangeOption] = useState(arr[1])
 
     return (
         <div>
             <hr/>
-            <h2>homeworks 7</h2>
+            <h2>Home work № 7</h2>
 
             {/*should work (должно работать)*/}
             <div>
@@ -20,6 +20,7 @@ function HW7() {
                     onChangeOption={onChangeOption}
                 />
             </div>
+            <br/>
             <div>
                 <SuperRadio
                     name='radio'
