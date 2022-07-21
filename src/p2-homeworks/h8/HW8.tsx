@@ -2,9 +2,15 @@ import React, {useState} from 'react'
 import {homeWorkReducer} from './bll/homeWorkReducer'
 import SuperButton from '../h4/common/c2-SuperButton/SuperButton'
 
-// export type UserType =
+export type userType = {
+    _id: number
+    name: string
+    age: number 
+}
 
-const initialPeople = [
+export type stateType = Array<userType>
+
+const initialPeople: stateType = [
     {_id: 0, name: 'Кот', age: 3},
     {_id: 1, name: 'Александр', age: 66},
     {_id: 2, name: 'Коля', age: 16},
@@ -13,34 +19,80 @@ const initialPeople = [
     {_id: 5, name: 'Ирина', age: 55},
 ]
 
-function HW8() {
-    const [people, setPeople] = useState<any>(initialPeople) // need to fix any
+// Actions
+export type sortUpActionType = {
+    type: 'SORT_UP'
+}
 
-    // need to fix any
-    const finalPeople = people.map((p: any) => (
-        <div key={p._id}>
-            some name, age
-        </div>
+export const sortUpAction = {
+    type: 'SORT_UP' as const
+}
+
+export type sortDownActionType = {
+    type: 'SORT_DOWN'
+}
+
+export const sortDownAction = {
+    type: 'SORT_DOWN' as const
+}
+
+export type check18ActionType = {
+    type: 'CHECK_18'
+}
+
+export const check18Action = {
+    type: 'CHECK_18' as const
+}
+
+function HW8() {
+    const [people, setPeople] = useState<stateType>(initialPeople)
+
+    const finalPeople = people.map((p: userType, index: number) => (
+        <tr key={index}>
+            <td>{p.name}</td>
+            <td>{p.age}</td>
+        </tr>
     ))
 
-    const sortUp = () => setPeople(homeWorkReducer(initialPeople, {type: 'sort', payload: 'up'}))
+    // Functions
+    const sortUp = () => setPeople(
+        homeWorkReducer(initialPeople, sortUpAction)
+    )
+
+    const sortDown = () => setPeople(
+        homeWorkReducer(initialPeople, sortDownAction)
+    )
+
+    const check18 = () => setPeople(
+        homeWorkReducer(initialPeople, check18Action)
+    )
 
     return (
         <div>
             <hr/>
-            homeworks 8
+            <h2>Home work № 8</h2>
 
-            {/*should work (должно работать)*/}
-            {finalPeople}
+            <div className="row">
+                <div className="col-lg-6">
+                    <table className="table table-dark">
+                        <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Age</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {finalPeople}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-            <div><SuperButton onClick={sortUp}>sort up</SuperButton></div>
-            <div>sort down</div>
-            check 18
-
-            <hr/>
-            {/*для личного творчества, могу проверить*/}
-            {/*<AlternativePeople/>*/}
-            <hr/>
+            <div>
+                <SuperButton className='me-2' onClick={sortUp}>Sort up</SuperButton>
+                <SuperButton className='me-2' onClick={sortDown}>Sort down</SuperButton>
+                <SuperButton onClick={check18}>Check 18</SuperButton>
+            </div>
         </div>
     )
 }
