@@ -1,36 +1,38 @@
-import React from 'react'
-import SuperButton from '../h4/common/c2-SuperButton/SuperButton'
+import React from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import SuperButton from '../h4/common/c2-SuperButton/SuperButton';
+import {loadingAC} from './bll/loadingReducer';
+import {AppStoreType} from './bll/store'
 
-function HW10() {
-    // useSelector, useDispatch
-    const loading = false
+
+const Preloader = () => {
+    return <div className="spinner-border text-light" role="status"></div>
+}
+
+const HW10 = () => {
+    const dispatch = useDispatch()
+    const loading = useSelector<AppStoreType, boolean>(state => state.loading.loading)
 
     const setLoading = () => {
-        // dispatch
-        // setTimeout
-        console.log('loading...')
-    };
+        dispatch(loadingAC(true))
+        setTimeout(()=> {
+            dispatch(loadingAC(false))
+        }, 2000)
+    }
 
     return (
         <div>
             <hr/>
-            homeworks 10
+            <h2>Home work № 10</h2>
 
-            {/*should work (должно работать)*/}
             {loading
-                ? (
-                    <div>крутилка...</div>
-                ) : (
+                ? <Preloader/>
+                : (
                     <div>
-                        <SuperButton onClick={setLoading}>set loading...</SuperButton>
+                        <SuperButton onClick={setLoading}>Set loading...</SuperButton>
                     </div>
                 )
             }
-
-            <hr/>
-            {/*для личного творчества, могу проверить*/}
-            {/*<Alternative/>*/}
-            <hr/>
         </div>
     )
 }

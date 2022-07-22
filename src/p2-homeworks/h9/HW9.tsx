@@ -7,7 +7,6 @@ function HW9() {
             <hr/>
             <h2>Home work № 9</h2>
             <Clock/>
-            <hr/>
         </div>
     )
 }
