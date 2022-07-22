@@ -7,14 +7,23 @@ type actionsType = sortUpActionType | sortDownActionType | check18ActionType
 export const homeWorkReducer = (state: stateType, action: actionsType): stateType => {
     switch (action.type) {
         case 'SORT_UP': {
-            return {
-                ...state
-            }
+            return [...state].sort(function(a, b) {
+                if(a.name.toLowerCase() > b.name.toLowerCase()) {
+                    return -1
+                } else {
+                    return 1
+                } 
+            })
         }
 
         case 'SORT_DOWN': {
-            // need to fix
-            return state
+            return [...state].sort(function(a, b) {
+                if(a.name.toLowerCase() < b.name.toLowerCase()) {
+                    return -1
+                } else {
+                    return 1
+                } 
+            })
         }
 
         case 'CHECK_18': {
