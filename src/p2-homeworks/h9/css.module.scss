@@ -1,0 +1,11 @@
+.block {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.time {
+    cursor: pointer;
+}

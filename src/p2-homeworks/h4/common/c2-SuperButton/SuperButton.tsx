@@ -8,10 +8,7 @@ type SuperButtonPropsType = DefaultButtonPropsType & {
     red?: boolean
 }
 
-const SuperButton: React.FC<SuperButtonPropsType> = ({red, className,...restProps}) => {
-
-    console.log(restProps)
-    
+const SuperButton: React.FC<SuperButtonPropsType> = ({red, className,...restProps}) => {    
     const finalClassName = `${red ? 'btn btn-danger' : 'btn btn-primary'} ${className}`
 
     return (
