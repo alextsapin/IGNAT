@@ -1,22 +1,44 @@
-import React from "react";
-import SuperButton from "../h4/common/c2-SuperButton/SuperButton";
-import SuperCheckbox from "../h4/common/c3-SuperCheckbox/SuperCheckbox";
-import {ignatApi} from "./api";
-
+import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {AppStoreType} from '../h10/bll/store';
+import SuperButton from '../h4/common/c2-SuperButton/SuperButton';
+import SuperCheckbox from '../h4/common/c3-SuperCheckbox/SuperCheckbox';
+import {ignatApi} from './api';
+import {responseType} from './reducer';
+import {setErrorAC, setInfo} from './reducer';
 
 const HW13 = () => {
-    const [error, setError] = React.useState(false);
+    const dispatch = useDispatch();
+
+    const error = useSelector<AppStoreType, boolean>(state => state.hw13.error)
+    const response = useSelector<AppStoreType, responseType>(state => state.hw13.response)
+
+    console.log(error)
+
+    function setErrorHandler(isError: boolean) {
+        dispatch(setErrorAC(isError))
+    }
 
     function sendRequest(isError: boolean) {
-        ignatApi.sendRequest(isError)
+        dispatch(setInfo(isError))
     }
     
     return (
         <div>
             <hr/>
             <h2>Home work № 13</h2>
-            <SuperCheckbox onChange={e => setError(e.currentTarget.checked)}>Ошибка в запросе</SuperCheckbox><br/><br/>
-            <SuperButton onClick={() => sendRequest(!error)}>Отправить</SuperButton>
+            <div className="row">
+                <div className="col-md-4">
+                    <h3>Запрос на сервер</h3>
+                    <SuperCheckbox onChange={e => setErrorHandler(e.currentTarget.checked)}>Добавить ошибку в запросе</SuperCheckbox><br/><br/>
+                    <SuperButton onClick={() => sendRequest(!error)}>Отправить</SuperButton>
+                </div>
+                <div className="col-md-8">
+                    <h3>Ответ сервера</h3>
+                    <p>{response.errorText}</p>
+                    <p>{response.info}</p>
+                </div>
+            </div>
         </div>
     );
 }

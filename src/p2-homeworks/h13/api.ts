@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
+import {responseType} from './reducer';
 
 const instance = axios.create({
     baseURL: 'https://neko-cafe-back.herokuapp.com/auth/test',
@@ -7,9 +8,10 @@ const instance = axios.create({
 
 export const ignatApi = {
     sendRequest(isError: boolean) {
-        return instance.post(`/`, {success: isError}).then((response) => {
-            console.log(response)
-            return response; 
+        return instance.post<responseType>(`/`, {success: isError}).then((response) => {
+            return response.data; 
+        }).catch(error => {
+            return error.response.data
         })
     }
 }
