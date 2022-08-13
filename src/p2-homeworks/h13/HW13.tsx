@@ -1,19 +1,16 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {AppStoreType} from '../h10/bll/store';
+import {AppDispatch, AppStoreType} from '../h10/bll/store';
 import SuperButton from '../h4/common/c2-SuperButton/SuperButton';
 import SuperCheckbox from '../h4/common/c3-SuperCheckbox/SuperCheckbox';
-import {ignatApi} from './api';
 import {responseType} from './reducer';
 import {setErrorAC, setInfo} from './reducer';
 
 const HW13 = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
 
     const error = useSelector<AppStoreType, boolean>(state => state.hw13.error)
     const response = useSelector<AppStoreType, responseType>(state => state.hw13.response)
-
-    console.log(error)
 
     function setErrorHandler(isError: boolean) {
         dispatch(setErrorAC(isError))

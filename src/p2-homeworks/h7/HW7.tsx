@@ -11,8 +11,6 @@ function HW7() {
         <div>
             <hr/>
             <h2>Home work № 7</h2>
-
-            {/*should work (должно работать)*/}
             <div>
                 <SuperSelect
                     options={arr}

@@ -1,5 +1,6 @@
 import {Dispatch} from 'redux';
-import { ignatApi } from './api';
+import {ignatApi} from './api';
+import {AppThunkType} from '../h10/bll/store';
 
 export type responseType = {
     errorText: string
@@ -19,7 +20,7 @@ const initialState: stateType = {
     }
 }
 
-export const hw13Reducer = (state = initialState, action: any): any   => {
+export const hw13Reducer = (state = initialState, action: ReturnType<typeof setErrorAC> | ReturnType<typeof setInfoAC>): stateType => {
     switch(action.type) {   
 
         case 'SET_ERROR': {
@@ -59,7 +60,7 @@ const setInfoAC = (errorText: string, info: string) => {
 }
 
 // Thunk creators
-export const setInfo = (error: boolean): any => {
+export const setInfo = (error: boolean): AppThunkType => {
     return (dispatch: Dispatch) => {
         ignatApi.sendRequest(error).then((response) => {
             dispatch(setInfoAC(response.errorText, response.info))
