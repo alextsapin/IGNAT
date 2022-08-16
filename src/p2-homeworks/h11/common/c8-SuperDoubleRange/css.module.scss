@@ -1,35 +1,19 @@
 .wrap {
-    position: relative;
-    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    width: 320px;
 }
 
-.value {
-    width: 35px;
-    margin-bottom: 1px;
+.number {
+    width: 60px;
+    margin-bottom: 0;
     text-align: center;
 }
 
-.input {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-        -webkit-appearance: none;
-        width: 200px;
-        height: 15px;
-        background: transparent;
-        position: relative;
-        z-index: 1;
-        border-radius: 50%;
-    
-}
-
-.input2 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: rotate(180deg);
+.line {
+    height: 6px;
+    width: 200px;
+    background-color: white;
 }

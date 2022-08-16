@@ -1,14 +1,19 @@
 import React from 'react';
 import {Range} from 'react-range';
+import css from './css.module.scss';
 
 type propsType = {
     value1: number
     value2: number
+    disabled: boolean
+    min: number
+    max: number
+    step: number
     setValue1: (value: number) => void
     setValue2: (value: number) => void
 }
 
-const SuperSimple = (props: propsType) => {
+const SuperDoubleRange = (props: propsType) => {
 
     function setValues(values: number[]) {
         props.setValue1(values[0])
@@ -16,10 +21,10 @@ const SuperSimple = (props: propsType) => {
     }
 
     return (
-        <div>
-            {props.value1}
-            <Range step={1} min={0} max={100} values={[props.value1, props.value2]} onChange={(values) => setValues(values)} renderTrack={({props, children}) => (
-                <div {...props} style={{ ...props.style, height: '6px', width: '200px', backgroundColor: 'white'}}>
+        <div className={css.wrap}>
+            <p className={css.number}>{props.value1}</p>
+            <Range disabled={props.disabled} step={props.step} min={props.min} max={props.max} values={[props.value1, props.value2]} onChange={(values) => setValues(values)} renderTrack={({props, children}) => (
+                <div {...props} className={css.line}>
                     {children}
                 </div>
                 )}
@@ -27,9 +32,9 @@ const SuperSimple = (props: propsType) => {
                     <div {...props} style={{...props.style, height: '20px', width: '20px', backgroundColor: '#0D6EFD', borderRadius: '50%'}}/>
                 )}
             />
-            {props.value2}
+            <p className={css.number}>{props.value2}</p>
         </div>
     )
 }
 
-export default SuperSimple;
+export default SuperDoubleRange;

@@ -10,9 +10,20 @@ function HW11() {
         <div>
             <hr/>
             <h2>Home work № 11</h2>
-            <SuperRange value={value1} min={0} max={100} step={1} onChangeRange={setValue1}/>
+            <SuperRange value={value1} disabled={false} min={0} max={100} step={1}setValue={setValue1}/>
+
             <br></br>
-            <SuperDoubleRange value1={value1} value2={value2} setValue1={setValue1} setValue2={setValue2}/>
+
+            <SuperDoubleRange 
+                value1={value1} 
+                value2={value2} 
+                disabled={false}
+                min={0}
+                max={100}
+                step={1}
+                setValue1={setValue1} 
+                setValue2={setValue2} 
+            />
         </div>
     )
 }

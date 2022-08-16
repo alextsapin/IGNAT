@@ -1,35 +1,36 @@
-import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from 'react'
+import React from 'react';
+import {Range} from 'react-range';
 import css from './css.module.scss';
 
-// тип пропсов обычного инпута
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type propsType = {
+    value: number
+    disabled: boolean
+    min: number
+    max: number
+    step: number
+    setValue: (value: number) => void
+}
 
-// здесь мы говорим что у нашего инпута будут такие же пропсы как у обычного инпута
-// (чтоб не писать value: string, onChange: ...; они уже все описаны в DefaultInputPropsType)
-type SuperRangePropsType = DefaultInputPropsType & { // и + ещё пропсы которых нет в стандартном инпуте
-    onChangeRange?: (value: number) => void
-};
+const SuperRange = (props: propsType) => {
 
-const SuperRange: React.FC<SuperRangePropsType> = ({type, value, onChange, onChangeRange, className, ...restProps}) => {
-    const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(e)
-        onChangeRange && onChangeRange(+e.currentTarget.value)
+    function setValues(values: number[]) {
+        props.setValue(values[0])
     }
 
-    const finalRangeClassName = `${css.range} ${className ? className : ''}`
-
     return (
-        <div className={css.box}>
-            <p className={css.value}>{value}</p>
-            <input
-                type={'range'}
-                value={value}
-                onChange={onChangeCallback}
-                className={finalRangeClassName}
-                {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
+        <div className={css.wrap}>
+            <p className={css.number}>{props.value}</p>
+            <Range step={props.step} min={props.min} max={props.max} values={[props.value]} onChange={(values) => setValues(values)} renderTrack={({props, children}) => (
+                <div {...props} className={css.line}>
+                    {children}
+                </div>
+                )}
+                renderThumb={({ props }) => (
+                    <div {...props} style={{...props.style, height: '20px', width: '20px', backgroundColor: '#0D6EFD', borderRadius: '50%'}}/>
+                )}
             />
         </div>
     )
 }
 
-export default SuperRange
+export default SuperRange;
