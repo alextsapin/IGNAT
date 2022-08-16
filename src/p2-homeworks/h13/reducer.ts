@@ -8,11 +8,13 @@ export type responseType = {
 }
 
 type stateType = {
+    isFetching: boolean
     error: boolean,
     response: responseType
 }
 
 const initialState: stateType = {
+    isFetching: false,
     error: false,
     response: {
         errorText: '...',
@@ -20,12 +22,20 @@ const initialState: stateType = {
     }
 }
 
-export const hw13Reducer = (state = initialState, action: ReturnType<typeof setErrorAC> | ReturnType<typeof setInfoAC>): stateType => {
+type totalType = ReturnType<typeof setErrorAC> | ReturnType<typeof setInfoAC> | ReturnType<typeof toggleFetchingAC>
+
+export const hw13Reducer = (state = initialState, action: totalType): stateType => {
     switch(action.type) {   
 
         case 'SET_ERROR': {
             return {
                 ...state, error: action.error
+            }
+        }
+
+        case 'TOGGLE_FETCHING': {
+            return {
+                ...state, isFetching: action.isFetching
             }
         }
 
@@ -51,6 +61,13 @@ export const setErrorAC = (error: boolean) => {
     }
 }
 
+export const toggleFetchingAC = (isFetching: boolean) => {
+    return {
+        type: 'TOGGLE_FETCHING' as const,
+        isFetching
+    }
+}
+
 const setInfoAC = (errorText: string, info: string) => {
     return {
         type: 'SET_INFO' as const,
@@ -62,8 +79,10 @@ const setInfoAC = (errorText: string, info: string) => {
 // Thunk creators
 export const setInfo = (error: boolean): AppThunkType => {
     return (dispatch: Dispatch) => {
+        dispatch(toggleFetchingAC(true))
         ignatApi.sendRequest(error).then((response) => {
             dispatch(setInfoAC(response.errorText, response.info))
+            dispatch(toggleFetchingAC(false))
         })
     }
 }

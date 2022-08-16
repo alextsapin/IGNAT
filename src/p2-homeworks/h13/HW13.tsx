@@ -3,13 +3,16 @@ import {useSelector, useDispatch} from 'react-redux';
 import {AppDispatch, AppStoreType} from '../h10/bll/store';
 import SuperButton from '../h4/common/c2-SuperButton/SuperButton';
 import SuperCheckbox from '../h4/common/c3-SuperCheckbox/SuperCheckbox';
+import Preloader from './Preloader';
 import {responseType} from './reducer';
 import {setErrorAC, setInfo} from './reducer';
+
 
 const HW13 = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const error = useSelector<AppStoreType, boolean>(state => state.hw13.error)
+    const isFetching = useSelector<AppStoreType, boolean>(state => state.hw13.isFetching)
     const response = useSelector<AppStoreType, responseType>(state => state.hw13.response)
 
     function setErrorHandler(isError: boolean) {
@@ -32,8 +35,8 @@ const HW13 = () => {
                 </div>
                 <div className="col-md-8">
                     <h3>Ответ сервера</h3>
-                    <p>{response.errorText}</p>
-                    <p>{response.info}</p>
+                    <p>{isFetching === false ? response.errorText : <Preloader/>}</p>
+                    <p>{isFetching === false ? response.info : <Preloader/>}</p>
                 </div>
             </div>
         </div>
