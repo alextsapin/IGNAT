@@ -1,5 +1,5 @@
 import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from 'react'
-import s from './SuperRange.module.css'
+import css from './css.module.scss';
 
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -10,33 +10,25 @@ type SuperRangePropsType = DefaultInputPropsType & { // и + ещё пропсы
     onChangeRange?: (value: number) => void
 };
 
-const SuperRange: React.FC<SuperRangePropsType> = (
-    {
-        type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
-        onChange, onChangeRange,
-        className,
-
-        ...restProps// все остальные пропсы попадут в объект restProps
-    }
-) => {
+const SuperRange: React.FC<SuperRangePropsType> = ({type, value, onChange, onChangeRange, className, ...restProps}) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(e) // сохраняем старую функциональность
-
+        onChange && onChange(e)
         onChangeRange && onChangeRange(+e.currentTarget.value)
     }
 
-    const finalRangeClassName = `${s.range} ${className ? className : ''}`
+    const finalRangeClassName = `${css.range} ${className ? className : ''}`
 
     return (
-        <>
+        <div className={css.box}>
+            <p className={css.value}>{value}</p>
             <input
                 type={'range'}
+                value={value}
                 onChange={onChangeCallback}
                 className={finalRangeClassName}
-
                 {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
             />
-        </>
+        </div>
     )
 }
 
